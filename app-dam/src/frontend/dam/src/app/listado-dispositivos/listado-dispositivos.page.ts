@@ -37,6 +37,7 @@ export class DispositivoPage implements OnInit{
   constructor(
     private route: ActivatedRoute,
     private dispositivoService: DispositivoService,
+    private valveService: DispositivoService,
     private router: Router
   ) {}
 
@@ -85,28 +86,28 @@ export class DispositivoPage implements OnInit{
     this.router.navigate([`/dispositivo`, this.dispositivoId, 'mediciones']);
   }
   
-  abrirValvula() {
-    this.dispositivoService.abrirValvula(this.dispositivoId)
-      .then(() => {
-        alert('Válvula abierta exitosamente');
-        this.actualizarEstadoValvula();
-      })
-      .catch((error) => {
-        console.error('Error al abrir la válvula:', error);
-        alert('No se pudo abrir la válvula');
-      });
+  async abrirValvula(dispositivoId: number) {
+    try {
+      await this.dispositivoService.abrirValvula(dispositivoId);
+      alert('Válvula abierta exitosamente');
+      this.actualizarEstadoValvula();
+      this.dispositivoService.setValveState(dispositivoId, true); // ✅ Notifica a Home
+    } catch (error) {
+      console.error('Error al abrir la válvula:', error);
+      alert('No se pudo abrir la válvula');
+    }
   }
   
-  cerrarValvula() {
-    this.dispositivoService.cerrarValvula(this.dispositivoId)
-      .then(() => {
-        alert('Válvula cerrada exitosamente');
-        this.actualizarEstadoValvula();
-      })
-      .catch((error) => {
-        console.error('Error al cerrar la válvula:', error);
-        alert('No se pudo cerrar la válvula');
-      });
+  async cerrarValvula(dispositivoId: number) {
+    try {
+      await this.dispositivoService.cerrarValvula(dispositivoId);
+      alert('Válvula cerrada exitosamente');
+      this.actualizarEstadoValvula();
+      this.dispositivoService.setValveState(dispositivoId, false); // ✅ Notifica a Home
+    } catch (error) {
+      console.error('Error al cerrar la válvula:', error);
+      alert('No se pudo cerrar la válvula');
+    }
   }
   private async actualizarEstadoValvula() {
     try {
@@ -117,6 +118,10 @@ export class DispositivoPage implements OnInit{
     }
   }
 
+  toggleValve(newState: boolean) {
+    this.valveService.setValveState(this.dispositivoId, newState);
+  }
+  
 
   volverAlHome() {
     this.router.navigate(['/home']);

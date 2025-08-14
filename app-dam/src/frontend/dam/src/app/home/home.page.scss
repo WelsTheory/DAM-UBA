@@ -29,3 +29,14 @@
   justify-content: space-between;
   gap: 8px;
 }
+
+.acciones-globales {
+  margin-top: 20px;
+  padding: 0 16px;
+
+  ion-button {
+    margin-left: 10px;
+    border-radius: 12px;
+    font-weight: 500;
+  }
+}

@@ -23,7 +23,7 @@
 
           <ion-card-content>
             <div class="measurement">
-              <span>ULTIMA MEDICION: {{ dispositivo.medicionActual || '—' }} °C </span>
+              <span>TEMPERATURA: {{ dispositivo.medicionActual || '—' }} °C </span>
             </div>
 
             <div class="botones">
@@ -42,17 +42,15 @@
 
       </ion-col>
     </ion-row>
-    <ion-row>
-      <div class="boton_on_all">
-        <ion-button fill="outline" size="small">
+    <ion-row class="acciones-globales">
+      <ion-col size="12" class="ion-text-right">
+        <ion-button fill="solid" color="success" size="small" (click)="encenderTodos()">
           Encender Todos
         </ion-button>
-      </div>
-      <div class="boton_off_all">
-        <ion-button fill="outline" size="small">
+        <ion-button fill="solid" color="danger" size="small" (click)="apagarTodos()">
           Apagar Todos
         </ion-button>
-      </div>
-    </ion-row>
+      </ion-col>
+    </ion-row>    
   </ion-grid>
 </ion-content>

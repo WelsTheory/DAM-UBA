@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { Dispositivo } from '../listado-dispositivos/dispositivo';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,17 @@ export class DispositivoService {
   private apiUrl = 'http://localhost:8000/dispositivo';
 
   constructor(private _http: HttpClient) {}
+
+  private valveState = new BehaviorSubject<{id: number, estado: boolean} | null>(null);
+  valveState$ = this.valveState.asObservable();
+
+  setValveState(id: number, estado: boolean) {
+    this.valveState.next({ id, estado });
+  }
+
+  getValveState(): boolean {
+    return this.valveState.value?.estado ?? false;
+  }
 
  
   getDispositivos(): Promise<Dispositivo[]> {

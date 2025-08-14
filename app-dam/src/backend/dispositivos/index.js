@@ -1,5 +1,7 @@
 const express = require('express');
+
 const routerDispositivos = express.Router();
+
 var pool = require('../mysql-connector');
 
 // Obtener todos los dispositivos

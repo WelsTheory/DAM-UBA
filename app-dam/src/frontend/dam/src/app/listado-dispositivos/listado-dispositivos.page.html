@@ -28,8 +28,8 @@
             <div class="ultima-medicion">
               <ng-container *ngIf="ultimaMedicion; else noMediciones">
                 <p><strong>Última Medición:</strong></p>
-                <p>Fecha: {{ ultimaMedicion.fecha }}</p>
-                <p>Valor: {{ ultimaMedicion.valor }}</p>
+                <p>Fecha: {{ ultimaMedicion.fecha | date: 'dd/MM/yyyy HH:mm'}}</p>
+                <p>Valor: {{ ultimaMedicion.valor }} °C</p>
               </ng-container>
               <ng-template #noMediciones>
                 <p>No hay mediciones registradas.</p>
@@ -38,8 +38,8 @@
 
             <!-- Botones de válvula -->
             <div class="botones-valvula">
-              <ion-button expand="block" color="success" (click)="abrirValvula()">Abrir Válvula</ion-button>
-              <ion-button expand="block" color="danger" (click)="cerrarValvula()">Cerrar Válvula</ion-button>
+              <ion-button expand="block" color="success" (click)="abrirValvula(dispositivo.dispositivoId)">Abrir Válvula</ion-button>
+              <ion-button expand="block" color="danger" (click)="cerrarValvula(dispositivo.dispositivoId)">Cerrar Válvula</ion-button>
             </div>
           </ion-card-content>
         </ion-col>
