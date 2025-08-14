@@ -41,12 +41,10 @@ services:
             -                    "8001:80"
 
     node-backend:
-        build:
-          context:               ./src/backend
-          dockerfile:            Dockerfile
+        image:                   abassi/nodejs-server:10.0-dev
         container_name:          node-backend
         volumes:
-            -                    ./src/backend:/src/backend
+            -                    ./src/backend:/home/node/app/src
             -                    ./src/frontend:/home/node/app/static
         networks:
             -                    app-fullstack-net
@@ -54,7 +52,7 @@ services:
             -                    mysql-server
         ports: 
             -                    "8000:3000"
-        command:                 nodemon index.js -L
+        command:                 nodemon /home/node/app/src/index.js
 
 networks:
     app-fullstack-net:

@@ -17,13 +17,17 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'listado-dispositivos',
-    loadComponent: () => import('./listado-dispositivos/listado-dispositivos.page').then( m => m.ListadoDispositivosPage),
-    canActivate: [authGuard]
+    path: 'dispositivo',
+    loadComponent: () => import('./listado-dispositivos/listado-dispositivos.page').then( m => m.DispositivoPage)
   },
   {
-    path: 'listado-dispositivos/:id',
-    loadComponent: () => import('./listado-dispositivos/listado-dispositivos.page').then( m => m.ListadoDispositivosPage),
-    canActivate: [authGuard]
-  }
+    path: 'dispositivo/:id',
+    loadComponent: () =>
+      import('./listado-dispositivos/listado-dispositivos.page').then((m) => m.DispositivoPage),
+  },
+  {
+    path: 'dispositivo/:id/mediciones',
+    loadComponent: () =>
+      import('./mediciones/mediciones.page').then((m) => m.MedicionesPage),
+  },
 ];
