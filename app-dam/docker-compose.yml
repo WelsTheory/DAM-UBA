@@ -41,18 +41,20 @@ services:
             -                    "8001:80"
 
     node-backend:
-        image:                   abassi/nodejs-server:10.0-dev
-        container_name:          node-backend
+        build:
+            context:                  ./src/backend
+            dockerfile:                 Dockerfile
+        container_name: node-backend
         volumes:
-            -                    ./src/backend:/home/node/app/src
-            -                    ./src/frontend:/home/node/app/static
+        - ./src/backend:/src/backend
         networks:
-            -                    app-fullstack-net
+        - app-fullstack-net
         depends_on:
-            -                    mysql-server
-        ports: 
-            -                    "8000:3000"
-        command:                 nodemon /home/node/app/src/index.js
+        - mysql-server
+        ports:
+        - "8000:3000"
+        command: >
+            sh -c "npm install && nodemon -L index.js"
 
 networks:
     app-fullstack-net:
