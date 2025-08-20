@@ -89,7 +89,7 @@ setTimeout(() => {
     setInterval(() => {
         console.log('Generando nuevas mediciones...');
         generarMediciones();
-    }, 300000); // cada 5 minutos
+    }, 300000); // cada 5 minutos (300,000 ms)
 }, 10000); // retraso inicial de 10 segundos
 
 //=======[ Rutas de la API ]====================================================
